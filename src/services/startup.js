@@ -67,13 +67,15 @@ const create = async (startupFormData) => {
             body: JSON.stringify(startupFormData),
         })
 
-        const data = await res.json()
+        const text = await res.text()
+
 
         if (!res.ok) {
-            throw new Error(data.err || "Failed to create startup")
+            throw new Error("Failed to create startup")
         }
 
-        return data
+
+        return JSON.parse(text)
 
     } catch (error) {
         console.log(error)
