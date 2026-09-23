@@ -10,7 +10,8 @@ import FounderProfile from './pages/Founder/FounderProfile'
 import EditFounderProfile from './pages/Founder/EditFounderProfile'
 import UserDashboard from './pages/User/UserDashboard'
 import StartUp from './pages/Founder/StartUp'
-
+import ViewStartUp from './pages/Founder/ViewStartUp'
+import EditStartUp from './pages/Founder/EditStartUp'
 
 const getUserFromToken = () => {
 
@@ -41,6 +42,8 @@ const App = () => {
         <Route path="/founder/profile"  element={ user?.user_type === "Founder"  ? <FounderProfile />  : <Navigate to="/" />} />
         <Route path="/founder/profile/edit"  element={user?.user_type === "Founder" ? <EditFounderProfile /> : <Navigate to="/" />}  />
         <Route path="/founder/Startup" element={<StartUp />}/>
+        <Route path="/founder/startups/:startupId" element ={user?.user_type === "Founder"  ? <ViewStartUp /> : <Navigate to="/" /> }  />
+        <Route path="/founder/startups/:startupId/edit" element ={user?.user_type === "Founder" ? <EditStartUp />  : <Navigate to="/" />} />
         <Route path='/user/dashboard' element={user?.user_type === "User" ? <UserDashboard />: <Navigate to="/" />  }/>
       
      

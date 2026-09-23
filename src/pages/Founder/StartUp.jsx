@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router"
 import *  as startupService from "../../services/startup"
+
 
 
 const BASE_URL = import.meta.env.VITE_BACK_END_SERVER_URL
@@ -7,6 +9,7 @@ const BASE_URL = import.meta.env.VITE_BACK_END_SERVER_URL
 
 const StartUp = ({user}) =>{
 
+    const navigate = useNavigate()
     const [startups, setStartups] = useState([])
     const [logo, setLogo] = useState(null)
     const [message, setMessage] = useState('')
@@ -125,7 +128,7 @@ const StartUp = ({user}) =>{
 
             setLogo(null)
 
-            setMessage("Startup created successfully!")
+            navigate(`/founder/startups/${createdStartup._id}`)
             
         } catch (error) {
 
@@ -192,36 +195,29 @@ const StartUp = ({user}) =>{
 
             {/* INDUSTRY */}
 
-                    <label htmlFor="industry">
-                        Industry
-                    </label>
+            <label htmlFor="industry">Industry</label>
+                       
+           <select id="industry" name="industry" value={formData.industry} onChange={handleChange} >
+    
+            <option value="Technology">Technology</option>
+            <option value="AI">AI</option>
+            <option value="FinTech">FinTech</option>
+            <option value="HealthTech">HealthTech</option>
+            <option value="EdTech">EdTech</option>
+            <option value="E-Commerce">E-Commerce</option>
+            <option value="SaaS">SaaS</option>
+            <option value="Food">Food</option>
+            <option value="Fashion">Fashion</option>
+            <option value="Other">Other</option>
 
-                    <select
-                        id="industry"
-                        name="industry"
-                        value={formData.industry}
-                        onChange={handleChange}
-                    >
-
-                        <option value="Technology">Technology</option>
-                        <option value="AI">AI</option>
-                        <option value="FinTech">FinTech</option>
-                        <option value="HealthTech">HealthTech</option>
-                        <option value="EdTech">EdTech</option>
-                        <option value="E-Commerce">E-Commerce</option>
-                        <option value="SaaS">SaaS</option>
-                        <option value="Food">Food</option>
-                        <option value="Fashion">Fashion</option>
-                        <option value="Other">Other</option>
-
-                    </select>
+            </select>
 
 
-                    {/* STAGE */}
+            {/* STAGE */}
 
-                    <label htmlFor="stage">
-                        Startup Stage
-                    </label>
+            <label htmlFor="stage">Startup Stage</label>
+                        
+                    
 
                     <select
                         id="stage"
@@ -294,85 +290,7 @@ const StartUp = ({user}) =>{
 
             </div>
 
-
-            {/* DISPLAY FOUNDER STARTUPS */}
-
-            <div className="startup-list">
-
-                <h2>Your Startups</h2>
-
-                {startups.filter(
-                    startup =>
-                        String(startup.founder._id) === String(user._id)
-                ).length === 0 ? (
-
-                    <p>No startups created yet.</p>
-
-                ) : (
-
-                    startups
-                        .filter(
-                            startup =>
-                                String(startup.founder._id) === String(user._id)
-                        )
-                        .map((startup) => (
-
-                            <div
-                                key={startup._id}
-                                className="startup-card"
-                            >
-
-                                {/* LOGO */}
-
-                                {startup.logo ? (
-
-                                    <img
-                                        src={`${BASE_URL}${startup.logo}`}
-                                        alt={`${startup.name} logo`}
-                                        className="startup-logo"
-                                    />
-
-                                ) : (
-
-                                    <div className="startup-logo-placeholder">
-                                        No Logo
-                                    </div>
-
-                                )}
-
-
-                                <h3>{startup.name}</h3>
-
-                                <p>{startup.description}</p>
-
-                                <p>
-                                    <strong>Industry:</strong>{" "}
-                                    {startup.industry}
-                                </p>
-
-                                <p>
-                                    <strong>Stage:</strong>{" "}
-                                    {startup.stage}
-                                </p>
-
-                                <p>
-                                    <strong>Location:</strong>{" "}
-                                    {startup.location}
-                                </p>
-
-                                <p>
-                                    {startup.is_recruiting
-                                        ? "Currently Recruiting"
-                                        : "Not Recruiting"}
-                                </p>
-
-                            </div>
-
-                        ))
-                )}
-
-            </div>
-
+            
         </section>
 
      
