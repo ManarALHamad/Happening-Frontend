@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router"
+import { Link, useNavigate } from "react-router"
 import *  as startupService from "../../services/startup"
 
 
@@ -27,25 +27,24 @@ const StartUp = ({user}) =>{
 
     })
 
-    //Get the startup
-
     useEffect(() => {
 
-        const fetchStartups = async () =>{
+        const fetchStartups = async () => {
 
             try {
 
-             const data = await startupService.index()
-             setStartups(data)
-                
+                const data = await startupService.index()
+                setStartups(Array.isArray(data) ? data : [])
+
             } catch (error) {
 
                 setMessage(error.message)
             }
-            fetchStartups()
         }
 
-    },  [])
+        fetchStartups()
+
+    }, [])
 
     const handleChange = (event) => {
 
@@ -136,6 +135,10 @@ const StartUp = ({user}) =>{
         }
     }
 
+    const myStartups = startups.filter(
+        (startup) => String(startup.founder?._id) === String(user?._id)
+    )
+
 
     return(
 
@@ -147,6 +150,22 @@ const StartUp = ({user}) =>{
                     <p>{message}</p>
                 )}
             </header>
+
+            <div className="startup-list">
+                {myStartups.length === 0 ? (
+                    <p>You have not created a startup yet.</p>
+                ) : (
+                    <ul>
+                        {myStartups.map((startup) => (
+                            <li key={startup._id}>
+                                <Link to={`/founder/startups/${startup._id}`}>
+                                    {startup.name}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
 
 
             {/* CREATE STARTUP */}
