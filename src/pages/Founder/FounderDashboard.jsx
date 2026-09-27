@@ -14,11 +14,8 @@ const FounderDashboard = () => {
     <main>
       <h1>Founder Dashboard</h1>
       <p>Manage your startups, roles, applications and team.</p>
-      <Link to="/founder/profile">
-
-      My Profile
-      
-      </Link>
+      <Link to="/founder/profile">My Profile</Link>
+      <Link to="/founder/Startup">My Startups</Link>
     </main>
   )
 }

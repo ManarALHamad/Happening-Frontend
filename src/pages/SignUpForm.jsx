@@ -81,7 +81,7 @@ const SignUpForm = (props) => {
                 <input type="password" name="confirmPassword" onChange={handleChange} value={formData.confirmPassword} required />
                 <div className="actions">
                     <button type="submit" disabled={!isFormValid()}>Sign Up</button>
-                    <button>Cancel</button>
+                    <button type="button" onClick={() => navigate('/')}>Cancel</button>
                 </div>
             </form>
         </section>
