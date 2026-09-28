@@ -154,7 +154,58 @@ return (
                 )}
 
             </div>
+                <div className="startup-roles">
 
+    <div className="roles-header">
+
+        <h2>Roles Needed</h2>
+
+        <Link to={`/founder/startups/${startup._id}/roles/new`}>
+            + Add Role
+        </Link>
+
+    </div>
+
+
+    {startup.roles?.length === 0 ? (
+
+        <p>No roles added yet.</p>
+
+    ) : (
+
+        startup.roles?.map((role) => (
+
+            <div
+                key={role._id}
+                className="role-card"
+            >
+
+                <h3>{role.title}</h3>
+
+                <p>
+                    <strong>Type:</strong> {role.role_type}
+                </p>
+
+                <p>{role.description}</p>
+
+                <p>
+                    <strong>Required Skills:</strong>{" "}
+                    {role.required_skills || "No specific skills"}
+                </p>
+
+                <p>
+                    {role.is_open
+                        ? "Open for applications"
+                        : "Role Closed"}
+                </p>
+
+            </div>
+
+        ))
+
+    )}
+
+</div>
 
             <div className="startup-actions">
 

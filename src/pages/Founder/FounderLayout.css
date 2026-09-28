@@ -1,0 +1,38 @@
+.founder-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.founder-sidebar {
+    width: 230px;
+    min-height: 100vh;
+    padding: 30px 20px;
+    border-right: 1px solid #ddd;
+    background-color: white;
+}
+
+.founder-sidebar h2 {
+    margin-bottom: 40px;
+}
+
+.founder-sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.founder-sidebar nav a {
+    padding: 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: black;
+}
+
+.founder-sidebar nav a:hover {
+    background-color: #f1f1f1;
+}
+
+.founder-page {
+    flex: 1;
+    min-width: 0;
+}
